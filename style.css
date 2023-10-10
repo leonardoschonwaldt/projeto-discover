@@ -12,7 +12,7 @@
 
 :root {
     --text-color: white;
-    --bg-url: url(./assets/bg-mobile.jpg);
+    --bg-url: url(./assets/dark-bg-mobile.jpg);
     --stroke-color: rgba(255, 255, 255, 0.5);
     --surface-color: rgba(255, 255, 255, 0.05);
     --surface-color-hover: rgba(255, 255, 255, 0.02);
@@ -22,26 +22,20 @@
 
 .light {
     --text-color: black;
-    --bg-url: url(./assets/bg-mobile-light.jpg);
+    --bg-url: url(./assets/light-bg-mobile.jpg);
     --stroke-color: rgba(0, 0, 0, 0.5);
     --surface-color: rgba(0, 0, 0, 0.05);
     --surface-color-hover: rgba(0, 0, 0, 0.02);
-    --highlight-color: rgba(0, 0, 0, 0.1);
+    --highlight-color: rgba(138, 138, 138, 0.1);
     --switch-bg-url: url(./assets/sun.svg);
 }
 
 body {
     background-image: var(--bg-url);
-    /* tag usada para colocar uma imagem de fundo*/
     background-repeat: no-repeat;
-    /* tag usada para que a imagem não se repita no fundo*/
     background-position: top center;
-    /* top muda o eixo y da imagem para cima e center alinha a mesma no centro*/
     background-size: cover;
-    /* tag usada para que a imagem preencha todo o fundo*/
-
-    /* tudo pode ser resumido na seguinte ordem: 
-    background: url() no-repeat top center/cover; */
+    height: 100vh;
 }
 
 body * {
@@ -50,17 +44,14 @@ body * {
 }
 
 #container {
-
-    width: 360px;
-    /* largura da caixa*/
+    width: 100%;
+    max-width: 360px;
     margin: auto;
-    /* alinha a caixa ao centro*/
     margin-top: 56px auto 0px;
 }
 
 #profile {
     text-align: center;
-    /* foi usado para deixar a imagem centralizada*/
     padding: 24px;
     gap: 8px;
 }
@@ -73,12 +64,11 @@ body * {
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
-    /* 150% */
 }
 
 #switch {
     width: 64px;
-    height: 24px;
+    height: 34px;
     position: relative;
 
     margin: 4px auto;
@@ -90,23 +80,30 @@ body * {
     background: white var(--switch-bg-url) no-repeat center;
     border: 0px;
     border-radius: 50%;
-
+    margin-left: 1px;
     position: absolute;
     top: 50%;
     left: 0;
-    z-index: 1; 
+    z-index: 1;
     transform: translateY(-50%);
+
+    animation: slide-back 0.2s;
 }
 
 .light #switch button {
-    right: 0;
-    left: initial;
+    animation: slide-in 0.2s forwards;
+    margin-right: 1px;
+
+}
+
+#switch button:hover {
+    outline: 8px solid var(--highlight-color);
 }
 
 #switch span {
     display: block;
     width: 64px;
-    height: 24px;
+    height: 34px;
     background: var(--surface-color);
     border: 1px solid var(--stroke-color);
     border-radius: 9999px;
@@ -151,7 +148,6 @@ ul li a:hover {
     display: flex;
     justify-content: center;
     font-size: 24px;
-    /* font size se aplica para ícones também*/
     margin: 24px;
 }
 
@@ -171,4 +167,37 @@ ul li a:hover {
 footer {
     margin: 24px;
     text-align: center;
+}
+
+@media (min-width: 700px) {
+    :root {
+        --bg-url: url(./assets/dark-bg-desktop.jpg);
+
+    }
+
+    .light {
+        --bg-url: url(./assets/light-bg-desktop.jpg);
+
+    }
+
+}
+
+@keyframes slide-in {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: 50%;
+    }
+}
+
+@keyframes slide-back {
+    from {
+        left: 50%;
+    }
+
+    to {
+        left: 0;
+    }
 }
